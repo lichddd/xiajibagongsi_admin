@@ -1,13 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
-import upload from '@/components/upload'
+import home from '@/views/Home'
+import upload from '@/views/upload'
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    { path: '/', redirect: '/home' },
     {
-      path: '/',
+      path: '/home',
+      name: 'home',
+      component: home
+    }
+    ,
+    {
+      path: '/upload',
       name: 'upload',
       component: upload
     }
