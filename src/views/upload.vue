@@ -26,7 +26,7 @@ class="uploader"
 </ul> -->
 <div class="images">
 <el-card class="card" v-for="(o, index) in uploadedlist" :body-style="{ padding: '0px' }">
-      <a target="_blank" :href="`http://localhost:8081/${o.name}`"><img :src="`http://localhost:8081/${o.name}`" class="image"></a>
+      <a target="_blank" :href="`${$config.host_pre_url+o.name}`"><img :src="`${$config.host_pre_url+o.name}`" class="image"></a>
       <i class="el-icon-delete delete"  @click="del(o)"></i>
 </el-card>
 </div>

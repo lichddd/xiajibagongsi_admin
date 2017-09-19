@@ -13,6 +13,12 @@ window.axios=axios;
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.prototype.$config={
+  host_pre_url:process.env.NODE_ENV=="development"?"http://localhost:8081/":'',
+
+
+
+}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
