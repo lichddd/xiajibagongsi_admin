@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '@/views/Home'
+import home from '@/views/home'
+import news from '@/views/news'
 import upload from '@/views/upload'
 Vue.use(Router)
 
@@ -11,6 +12,12 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: home
+    }
+    ,
+    {
+      path: '/news',
+      name: 'news',
+      component: news
     }
     ,
     {

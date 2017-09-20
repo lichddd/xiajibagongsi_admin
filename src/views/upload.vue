@@ -18,7 +18,7 @@ class="uploader"
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em>选取文件。选好之后点击下面的上传到服务器</div>
   <el-button style="margin-left: 10px;" size="small" type="success" @click.stop="$refs.upload.submit();">上传到服务器</el-button>
-  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且单个不超过5MB，总计不超过{{maxSize}}，当前已用{{allSize}}</div>
+  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且单个不超过5MB，总计不超过{{maxSize}}，当前已用{{allSize | disksize}}</div>
 </el-upload>
 
 <!-- <ul>

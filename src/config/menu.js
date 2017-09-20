@@ -5,7 +5,12 @@ export default [
     target:"home",
   },
   {
-    title:"上传图片",
+    title:"新闻",
+    code:"1",
+    target:"news",
+  },
+  {
+    title:"图片管理",
     code:"2",
     target:"upload",
   },
