@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    欢迎来到，瞎鸡巴公司官网管理中心
   </div>
 
 
@@ -31,7 +32,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.news{
+.home{
+  font-size: 36px;
 }
 
 </style>
