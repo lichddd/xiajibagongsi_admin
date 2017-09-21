@@ -1,9 +1,9 @@
 <template>
   <div class="edit">
   <div class="title">
-  <h4>{{this.newsID?'编辑':'新增'}}</h4>
-  <el-input v-if="!this.newsID" placeholder="请输入标题" v-model="title"></el-input>
-  <h4 v-if="this.newsID">{{title}}</h4>
+  <h4>{{newsObj.newsID?'编辑':'新增'}}</h4>
+  <el-input v-if="!newsObj.newsID" placeholder="请输入标题" v-model="newsObj.title"></el-input>
+  <h4 v-if="newsObj.newsID">{{newsObj.title}}</h4>
   </div>
   <div class="edit-html">
 
@@ -15,7 +15,7 @@
       <span class="btn-text" :class="{'show':htmlshow}">{{(htmlshow?'返回':'预览')}}</span>
     </div>
 
-    <div class="content" v-html="content"></div>
+    <div class="content" v-html="htmlStr"></div>
   </div>
 
   <el-button @click="submit()">提交</el-button>
@@ -36,7 +36,7 @@ export default {
     this.$el.getElementsByClassName('edit-html')[0].appendChild(ed);
     this.editor = new E('#'+name);
     this.editor.customConfig.onchange = (html) => {
-      this.content = html
+      this.htmlStr = html
     };
     this.editor.customConfig.uploadImgServer = 'admin/upload';
     this.editor.create();
@@ -46,23 +46,13 @@ export default {
 
   },
   props:{
-    newsID:{
-      type:String,
-      default:"",
-    },
-    content:{
-      type:String,
-      default:"",
-    },
-    title:{
-      type:String,
-      default:"",
-    }
+    newsObj:{},
   },
   data () {
     return {
       editor:null,
       htmlshow:false,
+      htmlStr:"",
       msg: 'Welcome to Your Vue.js App'
     }
   }
@@ -70,8 +60,8 @@ export default {
   methods:{
     submit(){
 
-      if (this.newsID) {
-        axios.put(`admin/editnews/${this.newsID}`,{html:this.content}).then(m => {
+      if (this.newsObj.newsID) {
+        axios.put(`admin/editnews/${this.newsObj.newsID}`,{html:this.htmlStr}).then(m => {
 
 
             this.$emit("edited");
@@ -83,7 +73,7 @@ export default {
 
       }
       else{
-        axios.post('admin/addnews',{title:this.title,html:this.content}).then(m => {
+        axios.post('admin/addnews',{title:this.newsObj.title,html:this.htmlStr}).then(m => {
 
           this.$emit("edited");
 
@@ -98,9 +88,9 @@ export default {
 
   },
   watch:{
-    content(){
-
-      this.editor.txt.html(this.content);
+    newsObj(){
+      this.htmlStr=this.newsObj.content;
+      this.editor.txt.html(this.newsObj.content);
 
     }
 

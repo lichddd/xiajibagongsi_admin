@@ -12,8 +12,8 @@
       </el-card>
 
     </div>
-    <editnews v-show="editshow" @edited="editshow=false;search()" @cancel="editshow=false;" :newsID="newsID" :content="content" :title="newstitle"></editnews>
-    <html_preview v-show="htmlshow" :content="content" :htmlshow.sync="htmlshow"></html_preview>
+    <editnews v-show="editshow" @edited="editshow=false;search()" @cancel="editshow=false;" :newsObj="newsObj" :newsID="newsID" :content="content" :title="newstitle"></editnews>
+    <html_preview v-show="htmlshow" :content="newsObj.content" :htmlshow.sync="htmlshow"></html_preview>
 
   </div>
 
@@ -36,6 +36,7 @@ export default {
       htmlshow:false,
       editshow:false,
       list:[],
+      newsObj:{},
       newsID:"",
       newstitle:"",
       content:"",
@@ -56,9 +57,7 @@ export default {
     },
     editnews(li)
     {
-      this.newsID=li.id;
-      this.content=li.html;
-      this.newstitle=li.title;
+this.newsObj={newsID:li.id,content:li.html,title:li.title};
       this.editshow=true;
 
     }
@@ -66,16 +65,14 @@ export default {
 
     addnews(li)
     {
-      this.newsID="";
-      this.content="";
-      this.newstitle="";
+      this.newsObj={newsID:"",content:"",title:""};
       this.editshow=true;
 
     }
     ,
     preview(li)
     {
-      this.content=li.html;
+      this.newsObj={newsID:li.id,content:li.html,newstitle:li.title};
       this.htmlshow=true;
 
     }
