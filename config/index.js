@@ -35,7 +35,13 @@ module.exports = {
           '^/admin': 'admin'
         }
       },
-
+      '/login': {
+        target: "http://localhost:8081",
+        changeOrigin: true,
+        pathRewrite: {
+          '^/login': 'login'
+        }
+      },
 
 
     },
