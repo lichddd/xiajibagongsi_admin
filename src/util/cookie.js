@@ -4,7 +4,7 @@ export default {
     return !m?"":unescape(m[2]);
   }
   ,
-  delCookie(name,paht){
+  delCookie(name,path){
     if (path) {
       document.cookie=name+"=;path="+path+";expires"+(new Date(0)).toGMTString()+";";
     } else {

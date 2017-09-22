@@ -7,7 +7,7 @@ import ElementUI from 'element-ui'
 import {Message} from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import axios from 'axios'
-
+import cookie from '@/util/cookie'
 import filter from './filter'
 
 if(process.env.NODE_ENV=="development")
@@ -42,6 +42,18 @@ axios.interceptors.response.use((response)=>{
   }
   else if (response.data.code!=0) {
     Message({showClose:true,message:response.data.desc,type:"error"});
+    if (response.data.code=9999) {
+      cookie.delCookie("token");
+      router.replace({
+        name:"login",
+        query:{
+          redirect:router.currentRoute.path
+        }
+
+
+      });
+    }
+
     return Promise.reject(response.data);
   }
   return response;
