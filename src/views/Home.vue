@@ -1,6 +1,8 @@
 <template>
   <div class="home">
     欢迎来到，瞎鸡巴公司官网管理中心
+
+    <el-date-picker type="date"> </el-date-picker>
   </div>
 
 

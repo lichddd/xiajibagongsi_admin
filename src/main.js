@@ -9,6 +9,9 @@ import 'element-ui/lib/theme-default/index.css'
 import axios from 'axios'
 import cookie from '@/util/cookie'
 import filter from './filter'
+import vue$methods from './vue$methods'
+
+import language from '@/config/language'
 
 if(process.env.NODE_ENV=="development")
 {
@@ -93,20 +96,17 @@ let eventer={
 
 Vue.mixin({
   data(){
-    return {'progress':progress,'eventer':eventer};
+    return {'progress':progress,'eventer':eventer,'language':language};
   }
 });
-Vue.config.productionTip = false
-Vue.use(ElementUI)
+Vue.config.productionTip = false;
+Vue.use(ElementUI, {locale:language.local});
 Vue.prototype.$config={
   host_pre_url:process.env.NODE_ENV=="development"?"http://localhost:8081/":'',
 }
 
-
-
-
-
 Vue.use(filter);
+Vue.use(vue$methods);
 /* eslint-disable no-new */
 let vm=new Vue({
   el: '#app',
