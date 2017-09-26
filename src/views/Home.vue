@@ -1,12 +1,14 @@
 <template>
   <div class="home">
     欢迎来到，瞎鸡巴公司官网管理中心
+    <button @click="down()"></button>
   </div>
 
 
 </template>
 
 <script>
+import filesaver from 'file-saver'
 export default {
   name: 'hello',
   components:{},
@@ -23,7 +25,12 @@ export default {
   }
   ,
   methods:{
+    down(){
+      var blob = new Blob(["a,b,c\n1,2,3"], {type: "text/plain;charset=utf-8"});
+      filesaver.saveAs(blob, "hello world.csv");
 
+
+    }
   },
   beforeDestroy(){
   }
