@@ -5,7 +5,7 @@ disksize.install= function(Vue){
     value=Number(value);
     function getSize(value,level=0)
     {
-      if (value>1024&&level<=5) {
+      if (value>=1024&&level<=5) {
         return getSize(value/1024,level+1);
       } else {
         return value.toFixed(2)+sizearr[level];

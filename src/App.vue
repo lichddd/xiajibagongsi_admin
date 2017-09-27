@@ -50,6 +50,7 @@ export default {
   overflow: auto;
   background-color: #ffffff;
   padding: 10px;
+
 }
 
 

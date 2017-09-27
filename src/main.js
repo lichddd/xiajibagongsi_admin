@@ -45,7 +45,7 @@ axios.interceptors.response.use((response)=>{
   }
   else if (response.data.code!=0) {
     Message({showClose:true,message:response.data.desc,type:"error"});
-    if (response.data.code=9999) {
+    if (response.data.code==9999) {
       cookie.delCookie("token");
       router.replace({
         name:"login",
