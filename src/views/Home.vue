@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    欢迎来到，瞎鸡巴公司官网管理中心
     <div class="counts">
       <div style="float:left;background-color: #69b3ff;color: #FFFFFF;width: 38px;height: 90px;padding-top:20px;margin: 0;border: none;" >
         <p style="    font-size: 16px;
@@ -12,28 +11,37 @@
 
 
       <div class="count">
-        <p>要素池量</p>
-        <h1>{{elePreCnt}}<span>项</span></h1>
+        <p>总空间</p>
+        <h1>{{info.maxsize | disksize}}</h1>
       </div>
       <div class="count">
-        <p>全图池量</p>
-        <h1>{{fullPicCnt}}<span>项</span></h1>
+        <p>图片已使用空间</p>
+        <h1>{{info.allsize | disksize}}</h1>
       </div>
       <div class="count">
-        <p>规则池量</p>
-        <h1>{{ruleCheckCnt}}<span>项</span></h1>
+        <p>数据已使用空间</p>
+        <h1>{{info.dbsize | disksize}}</h1>
       </div>
       <div class="count">
-        <p>记账池量</p>
-        <h1>11111<span>项</span></h1>
+        <p>文件数量</p>
+        <h1>{{info.filecount}}</h1>
       </div>
       <div class="count" style="border: none;">
-        <p>复核池量</p>
-        <h1>{{reCheckCnt}}<span>项</span></h1>
+        <p>新闻数量</p>
+        <h1>{{info.newscount}}</h1>
       </div>
 
     </div>
     <!-- <button @click="down()"></button> -->
+    <el-card class="box-card echart-continer" :body-style="{ padding: '0px' ,height: '100%' ,width: '100%'}">
+      <div class="echart">
+
+      </div>
+
+    </el-card>
+
+
+
   </div>
 
 
@@ -41,17 +49,24 @@
 
 <script>
 import filesaver from 'file-saver'
+import echarts from 'echarts'
 export default {
   name: 'hello',
+
   components:{},
   mounted(){
+    axios.get('admin/info').then(m => {
 
+      this.info=m.data.info;
 
+    });
+    this.echart = echarts.init(document.getElementsByClassName('echart')[0]);
 
+    this.drawChart();
   },
   data () {
     return {
-
+        info:{},
       msg: 'Welcome to Your Vue.js App'
     }
   }
@@ -63,6 +78,19 @@ export default {
 
 
     }
+    ,
+    drawChart(){
+
+      // 绘制图表
+      this.echart.setOption();
+
+
+    }
+    ,
+    getData(){
+
+      return option;
+    }
   },
   beforeDestroy(){
   }
@@ -73,7 +101,10 @@ export default {
 <style scoped>
 .home{
   /*font-size: 36px;*/
-
+  height: 100%;
+  position: relative;
+  padding-top: 20px;
+  /*padding-bottom: 20px;*/
 }
 p{
   margin: 0px;
@@ -82,7 +113,7 @@ p{
 .counts
 {
 	width: 100%;
-  margin: 20px auto 30px auto;
+  margin: 0px auto 30px auto;
   height: 90px;
   background: #f3f3f3;
 }
@@ -114,6 +145,18 @@ p{
     font-size: 0.6em;
     margin-top: 14px;
 }
-
+.echart-continer
+{
+  max-height: calc(100% - 135px);
+  height: calc(100% - 135px);
+  min-height: 400px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.echart
+{
+  height: 100% ;
+  width: 100%;
+}
 
 </style>
