@@ -8,15 +8,8 @@
   <div class="edit-html">
 
   </div>
-  <div class="pre-html" :class="{'show':htmlshow}">
-    <div class="html-show-btn" @click="htmlshow=!htmlshow">
+  <html_preview  :content="htmlStr" :htmlshow.sync="htmlshow"></html_preview>
 
-      <span class="btn-icon" :class="{'el-icon-arrow-left':!htmlshow,'el-icon-arrow-right':htmlshow,'show':htmlshow}"></span>
-      <span class="btn-text" :class="{'show':htmlshow}">{{(htmlshow?'返回':'预览')}}</span>
-    </div>
-
-    <div class="content" v-html="htmlStr"></div>
-  </div>
 
   <el-button @click="submit()">提交</el-button>
   <el-button @click="$emit('cancel')">取消</el-button>
@@ -27,8 +20,10 @@
 
 <script>
 import E from 'wangeditor'
+import html_preview from '@/components/html_preview'
 export default {
   name: 'hello',
+  components:{html_preview},
   mounted(){
     var ed = document.createElement("div");
     let name="editorElem"+(new Date()).getTime();

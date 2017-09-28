@@ -4,6 +4,7 @@ import home from '@/views/home'
 import login from '@/views/login'
 import news from '@/views/news'
 import upload from '@/views/upload'
+import setting from '@/views/setting'
 
 import {Message} from 'element-ui'
 import cookie from '@/util/cookie'
@@ -33,6 +34,12 @@ let router = new Router({
       path: '/upload',
       name: 'upload',
       component: upload
+    }
+    ,
+    {
+      path: '/setting',
+      name: 'setting',
+      component: setting
     }
   ]
 })
