@@ -92,13 +92,15 @@ export default {
 
 var date = [];
 var data = [];
-this.info.visit.visit.forEach((l)=>{
+
+  this.info.visit.visit.forEach((l)=>{
 
   date.push(l.date);
   data.push(l.count);
-})
+});
 
-
+let start=Math.floor((date.length-20>0?(date.length-20):0)/10) *10;
+start= start>95?95:start;
 
       return  {
           tooltip: {
@@ -131,11 +133,10 @@ this.info.visit.visit.forEach((l)=>{
           },
           dataZoom: [{
               type: 'inside',
-              start: 0,
-              end: 2
+              start: start,
+              end: 100
           }, {
-              start: 0,
-              end: 2,
+
               handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
               handleSize: '50%',
               handleStyle: {
@@ -166,6 +167,8 @@ this.info.visit.visit.forEach((l)=>{
     }
   },
   beforeDestroy(){
+    this.echart.dispose();
+    this.echart=null;
   }
 }
 </script>
