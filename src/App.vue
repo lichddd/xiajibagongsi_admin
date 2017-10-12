@@ -10,15 +10,18 @@
   <div class="main-continer"  v-on:scroll="onScroll($event)">
     <router-view></router-view>
   </div>
+  <cheat></cheat>
+
 </div>
 </template>
 
 <script>
 import aaa from '@/views/menu'
+import cheat from '@/views/cheat'
 export default {
   name: 'app',
   components: {
-    aaa,
+    aaa,cheat,
   },
 }
 </script>
@@ -63,5 +66,16 @@ export default {
   width: 200px;
   /*width: 0px;*/
   border-right: solid 1px #dcdcdc;
+}
+
+
+
+.tab-title-badge
+{
+
+}
+.tab-title-badge .el-badge__content
+{
+      top: 10px;
 }
 </style>
