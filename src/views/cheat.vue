@@ -1,6 +1,7 @@
 <template>
   <div class="cheat"  :class="{'show':show,'hide':(!show)}" @click="hasnew=false;">
-      <el-tabs type="card" closable @tab-remove="removeMsg">
+      <h2 v-if="list&&!list.length>0">没有消息</h2>
+      <el-tabs type="card" closable @tab-remove="removeMsg" class="el-tabs-margin-right">
         <el-tab-pane
           v-for="(l, index) in list"
           :key="l.source"
@@ -15,11 +16,17 @@
           </span>
           <div class="msgcontiner">
           <div class="msgcontinerinner">
-          <div v-for="m in l.msg" class="msg" :class="{'mymsg':m.my}">
+          <div v-for="(m,inx) in l.msg" class="msg" :class="{'mymsg':m.my}">
+            <span v-if="m.time&&(!l.msg[inx-1]||(l.msg[inx-1]&&(l.msg[inx].time!=l.msg[inx-1].time)))" class="time">
+              <span>
+              {{m.time}}
+            </span>
+            </span>
             <div>
               <span>{{m.text}}</span>
             </div>
           </div>
+
         </div>
         </div>
           <el-input v-model="l.str" style="width:calc(100% - 65px);display:inline-block;" @keydown.native.enter="sendMsg(l)"></el-input>
@@ -47,8 +54,8 @@ export default {
   }
   ,
   methods:{
-    getMsg(){
-      axios.get('admin/getMsg',{params:{name:"admin"}}).then(m => {
+    getMsg(lastID){
+      axios.get('admin/getMsg',{params:{name:"admin",lastID:lastID||''}}).then(m => {
         console.log(m.data);
         if(m.data.msg.list)
         {
@@ -70,25 +77,29 @@ export default {
             }
           });
           console.log(this.list);
-          axios.post('admin/readMsg',{lastID:m.data.msg.lastID,myname:"admin"}).then(m => {
-            this.getMsg();
-          }).catch(m=>{
-            this.getMsg();
-          });
+          this.getMsg(m.data.msg.lastID);
+
         }
       })
       .catch(m=>{
-
-        this.getMsg();
-
+        this.$nextTick(()=>{
+          this.$message({showClose:true,message:"消息服务连接失败,5秒后重连",type:"error"});
+        })
+        setTimeout(()=>{
+          this.getMsg();
+        },5000);
       });
 
     }
     ,
     sendMsg(data){
-
+      if (!data.str) {
+        return;
+      }
+      let str=data.str;
+      data.str="";
       axios.post('admin/sendMsg',{
-        body:data.str,
+        body:str,
         target:data.source,
         source:"admin"
       }).then(m => {
@@ -96,12 +107,12 @@ export default {
           return m.source==data.source;
         });
         if (arr&&arr.length>0) {
-          arr[0].msg.push({text:data.str,my:true});
+          arr[0].msg.push({text:str,my:true});
           this.setScroll();
         }
         else
         {
-          this.list.push({source:data.source,msg:[{text:data.str,my:true}],str:""});
+          this.list.push({source:data.source,msg:[{text:str,my:true}],str:""});
           this.setScroll();
         }
       })
@@ -169,6 +180,10 @@ export default {
 {
   display: none;
 }
+.cheat.hide h2
+{
+  display: none;
+}
 .iconpic
 {
   width: 35px;
@@ -202,6 +217,20 @@ export default {
 {
   text-align: left;
   margin-top: 10px;
+}
+.msgcontiner .msg .time
+{
+  width: 100%;
+display: inline-block;
+text-align: center;
+}
+.msgcontiner .msg .time span
+{
+  font-size: 8px;
+border-radius: 20px;
+background: #eaeaea;
+padding-left: 5px;
+padding-right: 5px;
 }
 .msgcontiner .msg>div
 {

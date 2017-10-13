@@ -78,4 +78,8 @@ export default {
 {
       top: 10px;
 }
+.el-tabs-margin-right .el-tabs__header
+{
+  margin-right: 40px;
+}
 </style>
