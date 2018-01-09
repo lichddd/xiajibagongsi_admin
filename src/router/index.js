@@ -41,6 +41,8 @@ let router = new Router({
       name: 'setting',
       component: setting
     }
+    ,
+    { path: '*', redirect: '/' },
   ]
 })
 router.beforeEach((to,from,next)=>{

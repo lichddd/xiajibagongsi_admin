@@ -12,7 +12,7 @@ ref="upload"
 :on-change="handleChange"
 drag
 multiple
-list-type="text"
+list-type="picture"
 class="uploader"
   >
   <i class="el-icon-upload"></i>
@@ -40,6 +40,50 @@ class="uploader"
 </div>
 </div>
 </template>
+<style>
+.el-upload-list__item
+{
+  width: 80px !important;
+  height: 80px !important;
+  padding: 0px !important;
+  display: inline-block;
+margin-right: 10px;
+}
+.el-upload-list__item .el-upload-list__item-thumbnail
+{
+  margin-left: 0px !important;
+  width: 80px !important;
+  height: 80px !important;
+}
+.el-upload-list__item .el-icon-close
+{
+  z-index: 2;
+}
+.el-upload-list.el-upload-list--picture
+{
+
+  text-align: left;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+.el-upload-list__item.is-success .el-upload-list__item-status-label
+{
+  z-index: 1;
+}
+.el-upload-list.el-upload-list--picture .el-progress.el-progress--line .el-progress__text
+{
+
+  width: 100%;
+  text-align: center;
+  top:60px;
+}
+.el-upload-list.el-upload-list--picture .el-upload-list__item-name
+{
+  display: none;
+}
+
+
+</style>
 <style scoped>
 .upload{
   min-height: 100%;

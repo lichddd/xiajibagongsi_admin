@@ -77,9 +77,10 @@ export default {
             }
           });
           console.log(this.list);
-          this.getMsg(m.data.msg.lastID);
+
 
         }
+        this.getMsg(m.data.msg.lastID);
       })
       .catch(m=>{
         this.$nextTick(()=>{

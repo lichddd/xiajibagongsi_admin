@@ -50,7 +50,7 @@ axios.interceptors.response.use((response)=>{
       router.replace({
         name:"login",
         query:{
-          redirect:router.currentRoute.path
+          redirect:router.currentRoute.name=='login'?(router.currentRoute.query.redirect?router.currentRoute.query.redirect:'/'):router.currentRoute.path
         }
 
 
