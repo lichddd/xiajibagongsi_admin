@@ -29,8 +29,8 @@ class="uploader"
 <div class="images">
 
 <el-card class="card" v-for="(o, index) in uploadedlist" :body-style="{ padding: '0px' ,width:'100%',height:'100%'}">
-      <el-tooltip content="使用图片请右键复制图片地址">
-      <a target="_blank" :href="`${$config.host_pre_url+o.name}`"><img :src="`${$config.host_pre_url+o.name}`" class="image"></a>
+      <el-tooltip content="点击图片显示原图">
+      <a target="_blank" :href="`${$config.host_pre_url}${o.href}`"><img :src="`${$config.host_pre_url}${o.name}`" class="image"></a>
       </el-tooltip>
       <el-tooltip content="删除">
       <i class="el-icon-delete delete"  @click="del(o)"></i>
@@ -172,7 +172,7 @@ margin-right: 10px;
       }
       ,
       del(f){
-        axios.delete(`admin/deluploaded/${f.name}`).then(m => {
+        axios.delete(`admin/deluploaded/${f.href}`).then(m => {
           this.search();
         });
       },
