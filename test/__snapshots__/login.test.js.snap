@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should have the expected html structure 1`] = `
+<div
+  class="login"
+>
+  <form
+    class="el-form form"
+  >
+    <div
+      class="el-form-item is-required"
+    >
+      <label
+        class="el-form-item__label"
+        for="user"
+        style="width: 60px;"
+      >
+        账户
+      </label>
+      <div
+        class="el-form-item__content"
+        style="margin-left: 60px;"
+      >
+        <div
+          class="el-input"
+        >
+          <!---->
+          <!---->
+          <input
+            autocomplete="off"
+            class="el-input__inner"
+            rows="2"
+            type="text"
+            validateevent="true"
+          />
+          <!---->
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="el-form-item is-required"
+    >
+      <label
+        class="el-form-item__label"
+        for="password"
+        style="width: 60px;"
+      >
+        密码
+      </label>
+      <div
+        class="el-form-item__content"
+        style="margin-left: 60px;"
+      >
+        <div
+          class="el-input"
+        >
+          <!---->
+          <!---->
+          <input
+            autocomplete="off"
+            class="el-input__inner"
+            rows="2"
+            type="password"
+            validateevent="true"
+          />
+          <!---->
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="el-form-item"
+    >
+      <!---->
+      <div
+        class="el-form-item__content"
+        style="margin-left: 60px;"
+      >
+        <button
+          class="el-button el-button--default el-button--large is-disabled"
+          disabled="disabled"
+          type="button"
+        >
+          <!---->
+          <!---->
+          <span>
+            重置
+          </span>
+        </button>
+         
+        <button
+          class="el-button el-button--primary el-button--large"
+          type="button"
+        >
+          <!---->
+          <!---->
+          <span>
+            登录
+          </span>
+        </button>
+        <!---->
+      </div>
+    </div>
+  </form>
+</div>
+`;
